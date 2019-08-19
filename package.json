@@ -1,0 +1,22 @@
+{
+  "name": "readinglist",
+  "version": "1.0.0",
+  "description": "A node app that allows users to create accounts, log books that they're reading, have already read, or intend to read, and share their ReadingList with their friends",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon -r dotenv/config src/index.js",
+    "test": "mocha"
+  },
+  "author": "Isaac J. Benzaken",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "dotenv": "^8.1.0",
+    "eslint": "^6.2.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  }
+}
