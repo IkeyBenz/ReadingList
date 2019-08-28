@@ -5,13 +5,13 @@
  * to '/users/'.
  */
 const User = require('../data/models/user.model');
-const router = require('express').Router();
+const userRouter = require('express').Router();
 
-router.post('/', async (req, res) => {
+userRouter.post('/', async (req, res) => {
   const newUser = new User(req.body);
   await newUser.save();
   res.end();
 });
 
-module.exports = router;
+module.exports = userRouter;
 
