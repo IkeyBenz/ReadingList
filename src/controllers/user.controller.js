@@ -7,11 +7,18 @@
 const User = require('../data/models/user.model');
 const userRouter = require('express').Router();
 
+/** CREATE new user */
 userRouter.post('/', async (req, res) => {
-  const newUser = new User(req.body);
-  await newUser.save();
+  await (new User(req.body)).save();
   res.end();
 });
+
+/** READ current user */
+
+/** UPDATE current user */
+
+/** DELETE current user */
+
 
 module.exports = userRouter;
 
