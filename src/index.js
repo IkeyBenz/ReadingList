@@ -5,6 +5,7 @@ const app = express();
 const { PORT } = process.env;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('cookie-parser')());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
