@@ -1,7 +1,7 @@
 const chai = require('chai');
 const { expect } = chai;
 chai.use(require('chai-http'));
-// chai.should();
+chai.should();
 
 require('dotenv').config();
 
@@ -33,9 +33,25 @@ describe("Authentication Tests", () => {
 
   });
 
-  // describe("POST /auth/signin/ with unregistered user", () => {
+  describe("POST /auth/signin/ with invalid credentials", () => {
+    const invalidUser = { email: 'wrong.email@address.com', password: 'incorrect' }
+    const request = () => chai.request(app).post('/auth/signin/').send(invalidUser);
 
-  // });
+    it('Returns 200', () => {
+      return request().then((res) => expect(res).to.have.status(200));
+    });
+
+    it("Does not send rl-cred before redirecting", () => {
+      return request().redirects(0).then((res) => {
+        expect(res).to.not.have.cookie('rl-cred')
+      });
+    });
+
+    it('Has error in query', () => {
+      return request().then((res) => expect(res).to.redirectTo(/^.*\?error=.*$/));
+    });
+
+  });
 
   // describe("GET /auth/signout/ with authenticated user", () => {
 
