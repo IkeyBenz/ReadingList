@@ -22,8 +22,13 @@ UserSchema.pre('save', function hashPassword(next) {
   });
 });
 
-UserSchema.methods.comparePassword = function (password, done) {
-  bcrypt.compare(password, this.password, done);
+UserSchema.methods.comparePassword = function (password) {
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(password, this.password, (err, same) => {
+      if (err) reject(err);
+      else resolve(same);
+    });
+  });
 }
 
 UserSchema.methods.generateCredential = function () {
