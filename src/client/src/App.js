@@ -6,7 +6,7 @@ import { HomePage, SignupPage, SigninPage, FriendsPage } from './layouts/';
 
 function App() {
   const [state, setState] = useState({
-    user: false
+    user: JSON.parse(localStorage.getItem('rl-user'))
   });
 
   if (cookie.load('rl-cred') && !state.user) {
@@ -20,7 +20,7 @@ function App() {
     <div>
       <Header user={state.user} />
       <BrowserRouter>
-        <Route exact path="/" render={() => <HomePage />} />
+        <Route exact path="/" render={() => <HomePage user={state.user} />} />
         <Route exact path="/signup/" render={() => <SignupPage />} />
         <Route exact path="/signin/" render={() => <SigninPage />} />
         <Route exact path="/friends/" render={() => <FriendsPage />} />
