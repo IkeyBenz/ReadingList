@@ -11,9 +11,10 @@ const { mockUser } = require('../data/mock-data');
 
 describe("Authentication Tests", () => {
 
-  describe("POST /auth/signin/ with registered user", () => {
+  before(async () => await (new UserModel(mockUser)).save());
+  after(async () => await UserModel.deleteMany({}));
 
-    before(async () => await (new UserModel(mockUser)).save());
+  describe("POST /auth/signin/ with registered user", () => {
 
     const request = () => chai.request(app).post('/auth/signin/').send(mockUser);
 
