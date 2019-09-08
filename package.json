@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon -r dotenv/config src/index.js",
+    "server": "nodemon -r dotenv/config src/",
+    "client": "cd src/client && npm start",
+    "dev": "concurrently --kill-others-on-fail \"mongod\" \"npm run server\" \"npm run client\"",
     "test": "mocha --exit --timeout 200000 src/test"
   },
   "author": "Isaac J. Benzaken",
@@ -20,6 +22,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "concurrently": "^4.1.2",
     "dotenv": "^8.1.0",
     "eslint": "^6.2.0",
     "eslint-config-airbnb-base": "^14.0.0",
