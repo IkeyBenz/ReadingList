@@ -35,4 +35,9 @@ UserSchema.methods.generateCredential = function () {
   return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '60 days' });
 }
 
-module.exports = model('User', UserSchema);
+UserSchema.statics.findByJWT = function (token) {
+  const _id = jwt.decode(token, process.env.JWT_SECRET)._id;
+  return this.findOne({ _id });
+}
+
+module.exports = model('user', UserSchema);
