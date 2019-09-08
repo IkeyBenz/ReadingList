@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const UserSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
-  password: { type: String, required: true },
+  password: { type: String, required: true, select: false },
   books: [{ title: String, author: String }],
   friends: [{ type: Schema.Types.ObjectId, ref: 'user' }]
 }, { timestamps: true });
