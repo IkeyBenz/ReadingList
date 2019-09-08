@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {
   Collapse,
   Navbar,
@@ -13,51 +13,43 @@ import {
   DropdownItem
 } from 'reactstrap';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
+function Header({ user, signout }) {
+  const [isOpen, toggleOpen] = useState(false);
 
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isOpen: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-  render() {
-    return (
-      <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">ReadingList</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/signin/">Sign In</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/signup/">Sign Up</NavLink>
-              </NavItem>
-
-
+  return (
+    <div>
+      <Navbar color="light" light expand="md">
+        <NavbarBrand href="/">ReadingList</NavbarBrand>
+        <NavbarToggler onClick={() => toggleOpen(!isOpen)} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className="ml-auto" navbar>
+            {user ? (
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>IkeyBenz</DropdownToggle>
+                <DropdownToggle nav caret>{user.name}</DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem><NavLink class="text-dark" href="/friends/">Friends</NavLink></DropdownItem>
+                  <DropdownItem><NavLink className="text-dark" href="/friends/">Friends</NavLink></DropdownItem>
                   <DropdownItem>My Reading List</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>Sign Out</DropdownItem>
+                  <DropdownItem onClick={signout}>Sign Out</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-    );
-  }
+            ) : (
+                <div>
+                  <NavItem>
+                    <NavLink href="/signin/">Sign In</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink href="/signup/">Sign Up</NavLink>
+                  </NavItem>
+                </div>
+              )
+            }
+
+          </Nav>
+        </Collapse>
+      </Navbar>
+    </div>
+  );
 }
 
 
