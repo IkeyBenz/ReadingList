@@ -7,7 +7,7 @@ const { PORT } = process.env;
 
 // Middleware
 app.use(require('cookie-parser')());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
