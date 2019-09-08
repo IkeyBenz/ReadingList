@@ -9,11 +9,11 @@ class SigninPage extends Component {
         </div>
         <div className="card-body">
           <div className="form-group">
-            <label for="email">Email:</label>
+            <label htmlFor="email">Email:</label>
             <input className="form-control" type="email" name="email" placeholder="example@email.com" required />
           </div>
           <div className="form-group">
-            <label for="password">Password:</label>
+            <label htmlFor="password">Password:</label>
             <input className="form-control" type="password" name="password" placeholder="********" required />
           </div>
         </div>
