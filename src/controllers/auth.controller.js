@@ -17,8 +17,12 @@ authRouter.post('/signin', async (req, res, next) => {
 });
 
 authRouter.get('/signout', (req, res) => {
-  res.clearCookie();
+  res.clearCookie('rl-cred');
   res.end();
+});
+
+authRouter.get('/current-user', async (req, res) => {
+  return res.json({ user: req.user });
 });
 
 module.exports = authRouter;
